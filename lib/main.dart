@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/start-screen.dart';
-import 'package:flutter_mastermind_sander/info-screen.dart';
-import 'package:flutter_mastermind_sander/score-screen.dart';
-import 'package:flutter_mastermind_sander/game-screen.dart';
+import 'start-screen.dart';
+import 'info-screen.dart';
+import 'score-screen.dart';
+import "game-screen.dart";
 
 
 void main() {
@@ -21,10 +21,10 @@ class MastermindApp extends StatelessWidget {
         appBar: AppBar(
           title: Text("M A S T E R M I N D"),
           centerTitle: true,
-          backgroundColor: Colors.purple[800],
-          foregroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(60, 7, 83, 1),
+          foregroundColor: Color.fromRGBO(145, 10, 103, 1),
         ),
-        body: Center(child: GameScreen()),
+        body: GameScreen(),
       ),
     );
   }
