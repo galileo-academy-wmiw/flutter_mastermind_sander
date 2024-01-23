@@ -51,11 +51,8 @@ class GameScreen extends StatelessWidget {
     return Container(
         height: 2200,
         color: Color.fromRGBO(145, 10, 103, 1),
-        child: Column(
+        child: ListView(
             children: [
-              RowOfPins(),
-              RowOfPins(),
-              RowOfPins(),
               RowOfPins(),
             ]
         )

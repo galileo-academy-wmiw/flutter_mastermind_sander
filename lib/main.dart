@@ -17,14 +17,28 @@ class MastermindApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("M A S T E R M I N D"),
-          centerTitle: true,
-          backgroundColor: Color.fromRGBO(60, 7, 83, 1),
-          foregroundColor: Color.fromRGBO(145, 10, 103, 1),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("M A S T E R M I N D"),
+            centerTitle: true,
+            backgroundColor: Color.fromRGBO(60, 7, 83, 1),
+            foregroundColor: Color.fromRGBO(145, 10, 103, 1),
+          ),
+          body: TabBarView(
+            children: [
+              GameScreen(),
+              InfoScreen(),
+            ],
+          ),
+          bottomNavigationBar: TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.gamepad)),
+              Tab(icon: Icon(Icons.info)),
+            ],
+          ),
         ),
-        body: GameScreen(),
       ),
     );
   }
