@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mastermind_sander/score_screen.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
 
@@ -10,7 +11,7 @@ class RowOfPins extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100,
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Expanded(child: Codepin()),
@@ -45,15 +46,45 @@ class RowOfPins extends StatelessWidget {
   }
 }
 
+class ScoreScreenButton extends StatelessWidget {
+  const ScoreScreenButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: ElevatedButton(
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.scoreboard),
+                Text("Check your score!"),
+              ],
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ScoreScreen())
+            );
+          },
+        ),
+    );
+  }
+}
+
+
 // This builds the game
 class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 2200,
-        color: Color.fromRGBO(145, 10, 103, 1),
+        color: Colors.white,
         child: ListView(
-            children: [
+            children: const [
               RowOfPins(),
+              ScoreScreenButton(),
             ]
         )
     );

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'start-screen.dart';
-import 'info-screen.dart';
-import 'score-screen.dart';
-import "game-screen.dart";
+import 'start_screen.dart';
+import 'info_screen.dart';
+import "game_screen.dart";
 
 
 void main() {
@@ -17,29 +16,49 @@ class MastermindApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("M A S T E R M I N D"),
-            centerTitle: true,
-            backgroundColor: Color.fromRGBO(60, 7, 83, 1),
-            foregroundColor: Color.fromRGBO(145, 10, 103, 1),
-          ),
-          body: TabBarView(
-            children: [
-              GameScreen(),
-              InfoScreen(),
-            ],
-          ),
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.gamepad)),
-              Tab(icon: Icon(Icons.info)),
-            ],
-          ),
+      home: const StartScreenRoute(),
+    );
+  }
+}
+
+class GameScreenRoute extends StatelessWidget {
+  const GameScreenRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("M A S T E R M I N D"),
+          centerTitle: true,
+          backgroundColor: const Color.fromRGBO(3, 6, 55, 1),
+          foregroundColor: Colors.white,
+        ),
+        body: TabBarView(
+          children: [
+            GameScreen(),
+            InfoScreen(),
+          ],
+        ),
+        bottomNavigationBar: const TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.gamepad)),
+            Tab(icon: Icon(Icons.info)),
+          ],
         ),
       ),
+    );
+  }
+}
+
+class StartScreenRoute extends StatelessWidget {
+  const StartScreenRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: StartScreen(),
     );
   }
 }

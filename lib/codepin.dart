@@ -13,7 +13,7 @@ class Codepin extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(
               width: 10,
-              color: Color.fromRGBO(3, 6, 55, 1),
+              color: const Color.fromRGBO(3, 6, 55, 1),
               style: BorderStyle.solid,
             ),
         ),
