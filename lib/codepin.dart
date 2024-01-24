@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mastermind_sander/theme.dart';
 
 class Codepin extends StatelessWidget {
   const Codepin({super.key});
@@ -9,11 +10,11 @@ class Codepin extends StatelessWidget {
           width: 80,
           height: 80,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: backgroundColor,
             shape: BoxShape.circle,
             border: Border.all(
-              width: 10,
-              color: const Color.fromRGBO(3, 6, 55, 1),
+              width: 7.5,
+              color: textColor,
               style: BorderStyle.solid,
             ),
         ),

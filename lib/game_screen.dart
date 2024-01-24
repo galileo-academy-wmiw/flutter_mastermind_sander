@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/score_screen.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'theme.dart';
 
 // Constructor for the rows of pin that will make up the stages of the game
 class RowOfPins extends StatelessWidget {
@@ -45,7 +47,7 @@ class RowOfPins extends StatelessWidget {
     );
   }
 }
-
+// Constructor of button to take player to ScoreScreen
 class ScoreScreenButton extends StatelessWidget {
   const ScoreScreenButton({super.key});
 
@@ -59,7 +61,7 @@ class ScoreScreenButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.scoreboard),
-                Text("Check your score!"),
+                Text("Check your score!", style: buttonTextStyle),
               ],
             ),
           ),
@@ -68,19 +70,21 @@ class ScoreScreenButton extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => ScoreScreen())
             );
+            audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
           },
         ),
     );
   }
 }
-
+// Initialize instance of AudioPlayer
+final AudioPlayer audioPlayer = AudioPlayer();
 
 // This builds the game
 class GameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 2200,
-        color: Colors.white,
+        color: backgroundColor,
         child: ListView(
             children: const [
               RowOfPins(),

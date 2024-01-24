@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'start_screen.dart';
 import 'info_screen.dart';
 import "game_screen.dart";
+import 'theme.dart';
 
 
 void main() {
@@ -15,7 +16,6 @@ class MastermindApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
       home: const StartScreenRoute(),
     );
   }
@@ -29,11 +29,14 @@ class GameScreenRoute extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: backgroundColor,
         appBar: AppBar(
-          title: const Text("M A S T E R M I N D"),
+          backgroundColor: textColor,
+          iconTheme: IconThemeData(
+            color: backgroundColor,
+          ),
+          title: const Text("M A S T E R M I N D", style: appBarTextStyle),
           centerTitle: true,
-          backgroundColor: const Color.fromRGBO(3, 6, 55, 1),
-          foregroundColor: Colors.white,
         ),
         body: TabBarView(
           children: [
@@ -58,7 +61,8 @@ class StartScreenRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: StartScreen(),
+      backgroundColor: backgroundColor,
+      body: StartScreen(),
     );
   }
 }

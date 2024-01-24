@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/main.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_mastermind_sander/theme.dart';
+import 'game_screen.dart' show audioPlayer;
 
 class MastermindLogo extends StatelessWidget {
   const MastermindLogo({super.key});
@@ -13,6 +16,7 @@ class MastermindLogo extends StatelessWidget {
 
 class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -25,7 +29,10 @@ class StartScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.arrow_forward),
-                  Text("Play Mastermind!"),
+                  Text(
+                    "Play Mastermind!",
+                    style: buttonTextStyle,
+                  ),
                 ],
               ),
             ),
@@ -34,6 +41,7 @@ class StartScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const GameScreenRoute()),
               );
+              audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
             },
           ),
         ],

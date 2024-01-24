@@ -8,7 +8,7 @@ class Codepin {
       case 0:
         return 'No color';
       case 1:
-        return 'Rood';
+        return 'Red';
       case 2:
         return 'Blue';
       case 3:
