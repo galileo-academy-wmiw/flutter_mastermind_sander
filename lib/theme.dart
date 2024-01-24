@@ -22,6 +22,7 @@ const lightColor = Color.fromRGBO(242, 175, 239, 1);
 const textColor = Color.fromRGBO(51, 24, 107, 1);
 const backgroundColor = Color.fromRGBO(255, 255, 255, 1.0);
 
+const codePinColor0 = backgroundColor;
 const codePinColor1 = Color.fromRGBO(242, 153, 153, 1.0);
 const codePinColor2 = Color.fromRGBO(153, 202, 242, 1.0);
 const codePinColor3 = Color.fromRGBO(153, 242, 181, 1);

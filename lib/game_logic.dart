@@ -1,30 +1,5 @@
 import 'dart:math';
 
-class Codepin {
-  int colorValue;
-  Codepin(this.colorValue);
-  String get colorOfPin {
-    switch (colorValue) {
-      case 0:
-        return 'No color';
-      case 1:
-        return 'Red';
-      case 2:
-        return 'Blue';
-      case 3:
-        return 'Green';
-      case 4:
-        return 'Yellow';
-      case 5:
-        return 'Purple';
-      case 6:
-        return 'Orange';
-      default:
-        return 'Error';
-    }
-  }
-}
-
 class Scorepin {
   int colorValue;
   Scorepin(this.colorValue);
@@ -79,7 +54,4 @@ void runGame() {
 
   List<int> myCodeSnippet = [1, 2, 3, 4];
   print(checkCodes(myCodeSnippet));
-
-  print(Codepin(3).colorOfPin);
-  print(Scorepin(2).colorOfPin);
 }

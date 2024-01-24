@@ -5,48 +5,49 @@ import 'scorepin.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'theme.dart';
 
-// Constructor for the rows of pin that will make up the stages of the game
+// Initialize variable rowOfPins
+const rowOfPins = Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround,
+  children: [
+    Expanded(child: Codepin()),
+    Expanded(child: Codepin()),
+    Expanded(child: Codepin()),
+    Expanded(child: Codepin()),
+    Expanded(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Scorepin(),
+              Scorepin(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Scorepin(),
+              Scorepin(),
+            ],
+          ),
+        ],
+      ),
+    ),
+  ],
+);
+
+// Constructor for the widget of a row of pins that will make up the stages of the game
 class RowOfPins extends StatelessWidget {
   const RowOfPins({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(child: Codepin()),
-          Expanded(child: Codepin()),
-          Expanded(child: Codepin()),
-          Expanded(child: Codepin()),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Scorepin(),
-                    Scorepin(),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Scorepin(),
-                    Scorepin(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    return rowOfPins;
   }
 }
+
 // Constructor of button to take player to ScoreScreen
 class ScoreScreenButton extends StatelessWidget {
   const ScoreScreenButton({super.key});
@@ -76,6 +77,7 @@ class ScoreScreenButton extends StatelessWidget {
     );
   }
 }
+
 // Initialize instance of AudioPlayer
 final AudioPlayer audioPlayer = AudioPlayer();
 
@@ -86,8 +88,11 @@ class GameScreen extends StatelessWidget {
         height: 2200,
         color: backgroundColor,
         child: ListView(
-            children: const [
-              RowOfPins(),
+            children: [
+              Container(
+                height: 100,
+                  child: RowOfPins()
+              ),
               ScoreScreenButton(),
             ]
         )
