@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
 
 // Text styles
 const TextStyle buttonTextStyle = TextStyle(

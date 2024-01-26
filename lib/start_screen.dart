@@ -16,7 +16,6 @@ class MastermindLogo extends StatelessWidget {
 
 class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
