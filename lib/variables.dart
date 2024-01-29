@@ -13,3 +13,6 @@ List<Color> colorList = [
 ];
 
 List<int> codePinColorSequence = [0, 0, 0, 0];
+
+const codePinClickSound = 'audio/punchy-taps-ui-9-183908.mp3';
+const startUpSound = 'audio/90s-game-ui-6-185099.mp3';

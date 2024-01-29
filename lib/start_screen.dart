@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/main.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_mastermind_sander/theme.dart';
+import 'package:flutter_mastermind_sander/variables.dart';
 import 'game_screen.dart' show audioPlayer;
 
 class MastermindLogo extends StatelessWidget {
@@ -40,7 +41,7 @@ class StartScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const GameScreenRoute()),
               );
-              audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+              audioPlayer.play(AssetSource(startUpSound));
             },
           ),
         ],

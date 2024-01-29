@@ -31,6 +31,7 @@ class _RowOfPinsState extends State<RowOfPins> {
             child: GestureDetector(
               onTap: (){
                 setState(() {
+                  audioPlayer.play(AssetSource(codePinClickSound));
                   index = 0;
                   i++;
                   if (i > 6) i = 1;
@@ -56,6 +57,7 @@ class _RowOfPinsState extends State<RowOfPins> {
             child: GestureDetector(
               onTap: (){
                 setState(() {
+                  audioPlayer.play(AssetSource(codePinClickSound));
                   index = 1;
                   j++;
                   if (j > 6) j = 1;
@@ -81,6 +83,7 @@ class _RowOfPinsState extends State<RowOfPins> {
             child: GestureDetector(
               onTap: (){
                 setState(() {
+                  audioPlayer.play(AssetSource(codePinClickSound));
                   index = 2;
                   k++;
                   if (k > 6) k = 1;
@@ -106,6 +109,7 @@ class _RowOfPinsState extends State<RowOfPins> {
             child: GestureDetector(
               onTap: (){
                 setState(() {
+                  audioPlayer.play(AssetSource(codePinClickSound));
                   index = 3;
                   l++;
                   if (l > 6) l = 1;
@@ -131,6 +135,7 @@ class _RowOfPinsState extends State<RowOfPins> {
             child: Center(
               child: IconButton(
                 onPressed: (){
+                  audioPlayer.play(AssetSource(startUpSound));
                   print(codePinColorSequence);
                 },
                 iconSize: 40,
