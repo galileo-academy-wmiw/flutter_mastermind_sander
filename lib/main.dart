@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mastermind_sander/settings_screen.dart';
 import 'start_screen.dart';
 import 'info_screen.dart';
 import "game_screen.dart";
@@ -31,6 +32,18 @@ class GameScreenRoute extends StatelessWidget {
       child: Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
+          actions: [
+            IconButton(
+                onPressed: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsScreen()));
+                },
+                icon: Icon(
+                  Icons.settings,
+                  color: backgroundColor,
+                ),
+            ),
+          ],
           backgroundColor: textColor,
           iconTheme: IconThemeData(
             color: backgroundColor,
