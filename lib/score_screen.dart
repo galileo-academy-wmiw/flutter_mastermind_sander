@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_mastermind_sander/game_screen.dart';
 import 'theme.dart';
+import 'variables.dart';
 
 class ScoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {

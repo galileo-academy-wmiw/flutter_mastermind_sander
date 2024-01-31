@@ -4,6 +4,7 @@ import 'scorepin.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'theme.dart';
 import 'variables.dart';
+import 'codepin.dart';
 
 
 // Constructor for the widget of a row of pins that will make up the stages of the game
@@ -14,161 +15,59 @@ class RowOfPins extends StatefulWidget {
   State<RowOfPins> createState() => _RowOfPinsState();
 }
 
-class _RowOfPinsState extends State<RowOfPins> {
-
-  int index = 0;
-  int i = 0;
-  int j = 0;
-  int k = 0;
-  int l = 0;
+class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-            child: GestureDetector(
-              onTap: (){
-                setState(() {
-                  audioPlayer.play(AssetSource(codePinClickSound));
-                  index = 0;
-                  i++;
-                  if (i > 6) i = 1;
-                  codePinColorSequence[index] = i;
-                });
-              },
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: colorList[i],
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 7.5,
-                    color: textColor,
-                    style: BorderStyle.solid,
+    return AnimatedPositioned(
+      duration: Duration(seconds: 2),
+      left: 200,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Codepin(0),
+          Codepin(1),
+          Codepin(2),
+          Codepin(3),
+          Expanded(
+              child: Center(
+                child: IconButton(
+                  onPressed: (){
+                    audioPlayer.play(AssetSource(startUpSound));
+                    print(codePinColorSequence);
+                  },
+                  iconSize: 40,
+                  color: textColor,
+                  icon: const Icon(
+                    Icons.play_arrow
                   ),
                 ),
               ),
-            )
-        ),
-        Expanded(
-            child: GestureDetector(
-              onTap: (){
-                setState(() {
-                  audioPlayer.play(AssetSource(codePinClickSound));
-                  index = 1;
-                  j++;
-                  if (j > 6) j = 1;
-                  codePinColorSequence[index] = j;
-                });
-              },
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: colorList[j],
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 7.5,
-                    color: textColor,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-              ),
-            )
-        ),
-        Expanded(
-            child: GestureDetector(
-              onTap: (){
-                setState(() {
-                  audioPlayer.play(AssetSource(codePinClickSound));
-                  index = 2;
-                  k++;
-                  if (k > 6) k = 1;
-                  codePinColorSequence[index] = k;
-                });
-              },
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: colorList[k],
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 7.5,
-                    color: textColor,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-              ),
-            )
-        ),
-        Expanded(
-            child: GestureDetector(
-              onTap: (){
-                setState(() {
-                  audioPlayer.play(AssetSource(codePinClickSound));
-                  index = 3;
-                  l++;
-                  if (l > 6) l = 1;
-                  codePinColorSequence[index] = l;
-                });
-              },
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  color: colorList[l],
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 7.5,
-                    color: textColor,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-              ),
-            )
-        ),
-        Expanded(
-            child: Center(
-              child: IconButton(
-                onPressed: (){
-                  audioPlayer.play(AssetSource(startUpSound));
-                  print(codePinColorSequence);
-                },
-                iconSize: 40,
-                color: textColor,
-                icon: const Icon(
-                  Icons.play_arrow
-                ),
-              ),
-            ),
-        ),
-        const Expanded(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Scorepin(),
-                  Scorepin(),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Scorepin(),
-                  Scorepin(),
-                ],
-              ),
-            ],
           ),
-        ),
-      ],
+          const Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Scorepin(),
+                    Scorepin(),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Scorepin(),
+                    Scorepin(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -203,8 +102,6 @@ class ScoreScreenButton extends StatelessWidget {
   }
 }
 
-// Initialize instance of AudioPlayer
-final AudioPlayer audioPlayer = AudioPlayer();
 
 // This builds the game
 class GameScreen extends StatelessWidget {
@@ -214,9 +111,23 @@ class GameScreen extends StatelessWidget {
         color: backgroundColor,
         child: ListView(
             children: [
-              Container(
-                height: 100,
-                  child: const RowOfPins()
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Card(
+                  child: Container(
+                    height: 100,
+                      child: const RowOfPins()
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Card(
+                  child: Container(
+                      height: 100,
+                      child: const RowOfPins()
+                  ),
+                ),
               ),
               const ScoreScreenButton(),
             ]
