@@ -35,7 +35,9 @@ class ScoreScreenButton extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => ScoreScreen())
             );
-            audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+            if (isSoundOn) {
+              audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+            }
           },
         ),
     );

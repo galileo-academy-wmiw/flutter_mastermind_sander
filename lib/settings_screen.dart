@@ -9,8 +9,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isSoundOn = true;
-  bool isColorBlindModeOn = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

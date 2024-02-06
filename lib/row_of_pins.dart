@@ -47,7 +47,9 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                       child: IconButton(
                         onPressed: (){
                           setState(() {
-                            audioPlayer.play(AssetSource(startUpSound));
+                            if (isSoundOn) {
+                              audioPlayer.play(AssetSource(startUpSound));
+                            }
                             print(codePinColorSequence);
                           });
                         },

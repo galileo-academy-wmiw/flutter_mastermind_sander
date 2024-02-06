@@ -26,7 +26,9 @@ class _CodepinState extends State<Codepin> {
             child: GestureDetector(
               onTap: (){
                 setState(() {
-                  audioPlayer.play(AssetSource(codePinClickSound));
+                  if (isSoundOn) {
+                    audioPlayer.play(AssetSource(codePinClickSound));
+                  }
                   i++;
                   if (i > 6) i = 1;
                   codePinColorSequence[widget.index] = i;

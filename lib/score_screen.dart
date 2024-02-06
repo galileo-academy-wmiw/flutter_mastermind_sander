@@ -27,7 +27,9 @@ class ScoreScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.pop(context);
-                  audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+                  if (isSoundOn) {
+                    audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+                  }
                 },
               )
           ),

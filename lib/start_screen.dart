@@ -39,7 +39,9 @@ class StartScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const GameScreenRoute()),
               );
-              audioPlayer.play(AssetSource(startUpSound));
+              if (isSoundOn) {
+                audioPlayer.play(AssetSource(startUpSound));
+              }
             },
           ),
         ],

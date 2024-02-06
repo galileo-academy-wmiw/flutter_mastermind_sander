@@ -58,6 +58,10 @@ const startUpSound = 'audio/90s-game-ui-6-185099.mp3';
 // SETTINGS
 // Number of tries
 double numOfTries = 12;
+// Sound on/off
+bool isSoundOn = true;
+// Colorblind mode on/off
+bool isColorBlindModeOn = false;
 
 //PainterClass
 class PainterTest extends CustomPainter{
