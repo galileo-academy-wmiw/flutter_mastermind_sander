@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/theme.dart';
+import 'package:flutter_mastermind_sander/variables.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,49 +25,70 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       body: DefaultTextStyle(
         style: pTextStyle,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Sound:'),
-                  Switch(
-                      value: isSoundOn,
-                      onChanged: (value){
+        child: Center(
+          child: Container(
+            width: 600,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Sound:'),
+                      Switch(
+                          value: isSoundOn,
+                          onChanged: (value){
+                            setState(() {
+                              isSoundOn = !isSoundOn;
+                            });
+                          }),
+                      if (isSoundOn == true) Icon(
+                        Icons.volume_up_rounded,
+                        color: primaryColor,
+                      )
+                      else Icon(
+                        Icons.volume_off_rounded,
+                        color: primaryColor,
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Colorblind Mode:'),
+                      Switch(
+                          value: isColorBlindModeOn,
+                          onChanged: (value){
+                            setState(() {
+                              isColorBlindModeOn = !isColorBlindModeOn;
+                            });
+                          }),
+                    ],
+                  ),
+                ),
+                Text('Number of tries: $numOfTries'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Slider(
+                      value: numOfTries,
+                      min: 10,
+                      max: 20,
+                      divisions: 10,
+                      label: numOfTries.toString(),
+                      onChanged: (double value) {
                         setState(() {
-                          isSoundOn = !isSoundOn;
+                          numOfTries = value;
                         });
-                      }),
-                  if (isSoundOn == true) Icon(
-                    Icons.volume_up_rounded,
-                    color: primaryColor,
-                  )
-                  else Icon(
-                    Icons.volume_off_rounded,
-                    color: primaryColor,
-                  )
-                ],
-              ),
+                      }
+                  ),
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Colorblind Mode:'),
-                  Switch(
-                      value: isColorBlindModeOn,
-                      onChanged: (value){
-                        setState(() {
-                          isColorBlindModeOn = !isColorBlindModeOn;
-                        });
-                      }),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

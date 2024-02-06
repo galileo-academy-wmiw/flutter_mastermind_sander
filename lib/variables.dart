@@ -21,3 +21,6 @@ final AudioPlayer audioPlayer = AudioPlayer();
 
 const codePinClickSound = 'audio/punchy-taps-ui-9-183908.mp3';
 const startUpSound = 'audio/90s-game-ui-6-185099.mp3';
+
+// Number of tries
+double numOfTries = 12;
