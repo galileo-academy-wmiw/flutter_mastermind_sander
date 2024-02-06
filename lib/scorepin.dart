@@ -9,14 +9,9 @@ class Scorepin extends StatelessWidget {
     return Container(
       width: 25,
       height: 25,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        shape: BoxShape.circle,
-        border: Border.all(
-          width: 4,
-          color: textColor,
-          style: BorderStyle.solid,
-        ),
+      child: CustomPaint(
+        painter: PainterTest(backgroundColor),
+        size: Size(25, 25),
       ),
     );
   }

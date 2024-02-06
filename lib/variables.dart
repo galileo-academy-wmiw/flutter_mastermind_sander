@@ -58,3 +58,22 @@ const startUpSound = 'audio/90s-game-ui-6-185099.mp3';
 // SETTINGS
 // Number of tries
 double numOfTries = 12;
+
+//PainterClass
+class PainterTest extends CustomPainter{
+  final Color pinColor;
+  PainterTest(this.pinColor);
+
+  void paint (Canvas canvas, Size size){
+    final paint = Paint();
+    paint.color = textColor;
+    var c = Offset(size.width / 2, size.height / 2);
+    canvas.drawCircle(c, size.width / 2, paint);
+    paint.color = pinColor;
+    canvas.drawCircle(c, size.width / 2.4, paint);
+
+  }
+  bool shouldRepaint (CustomPainter oldDelegate) {
+    return true;
+  }
+}

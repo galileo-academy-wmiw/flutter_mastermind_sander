@@ -47,20 +47,3 @@ class _CodepinState extends State<Codepin> {
   }
 }
 
-class PainterTest extends CustomPainter{
-  final Color pinColor;
-  PainterTest(this.pinColor);
-
-  void paint (Canvas canvas, Size size){
-    final paint = Paint();
-    paint.color = textColor;
-    var c = Offset(size.width / 2, size.height / 2);
-    canvas.drawCircle(c, size.width / 2, paint);
-    paint.color = pinColor;
-    canvas.drawCircle(c, size.width / 2.4, paint);
-
-  }
-  bool shouldRepaint (CustomPainter oldDelegate) {
-    return true;
-  }
-}
