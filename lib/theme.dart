@@ -24,10 +24,10 @@ const backgroundColor = Color.fromRGBO(255, 255, 255, 1.0);
 const codePinColor0 = backgroundColor;
 const codePinColor1 = Color.fromRGBO(242, 153, 153, 1.0);
 const codePinColor2 = Color.fromRGBO(153, 202, 242, 1.0);
-const codePinColor3 = Color.fromRGBO(153, 242, 181, 1);
-const codePinColor4 = Color.fromRGBO(242, 227, 153, 1.0);
-const codePinColor5 = Color.fromRGBO(199, 153, 242, 1.0);
-const codePinColor6 = Color.fromRGBO(242, 184, 153, 1.0);
+const codePinColor3 = Color.fromRGBO(153, 242, 181, 1.0);
+const codePinColor4 = Color.fromRGBO(239, 242, 153, 1.0);
+const codePinColor5 = Color.fromRGBO(209, 153, 242, 1.0);
+const codePinColor6 = Color.fromRGBO(242, 193, 153, 1.0);
 
 const scorePinColor0 = Color.fromRGBO(242, 153, 153, 1.0);
 const scorePinColor1 = Color.fromRGBO(242, 227, 153, 1.0);
