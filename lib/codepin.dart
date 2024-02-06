@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'variables.dart';
-import 'theme.dart';
 
 
 // The Codepin class build a single codepin. It has a parameter for the index position.

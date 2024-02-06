@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/score_screen.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'theme.dart';
 import 'variables.dart';
 import 'row_of_pins.dart';
 

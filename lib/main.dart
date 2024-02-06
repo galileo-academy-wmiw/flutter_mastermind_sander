@@ -3,7 +3,7 @@ import 'package:flutter_mastermind_sander/settings_screen.dart';
 import 'start_screen.dart';
 import 'info_screen.dart';
 import "game_screen.dart";
-import 'theme.dart';
+import 'variables.dart';
 
 
 void main() {

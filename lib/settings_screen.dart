@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/theme.dart';
 import 'package:flutter_mastermind_sander/variables.dart';
 
 class SettingsScreen extends StatefulWidget {

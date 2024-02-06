@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/theme.dart';
+import 'variables.dart';
 
 class Scorepin extends StatelessWidget {
   const Scorepin({super.key});

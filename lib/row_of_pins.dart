@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
-import 'theme.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 // Constructor for the widget of a row of pins that will make up the stages of the game

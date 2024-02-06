@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/start_screen.dart';
-import 'package:flutter_mastermind_sander/theme.dart';
+import 'variables.dart';
 
 class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
