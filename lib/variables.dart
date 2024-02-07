@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'row_of_pins.dart';
 
 // VARIABLES
 // Text styles
@@ -66,6 +67,16 @@ final AudioPlayer audioPlayer = AudioPlayer();
 
 const codePinClickSound = 'audio/punchy-taps-ui-9-183908.mp3';
 const startUpSound = 'audio/90s-game-ui-6-185099.mp3';
+
+
+List<RowOfPins> allRows = [
+  RowOfPins(),
+];
+
+void makeNewRowOfPins() {
+  allRows.add(RowOfPins());
+  print('Row Added. Total Rows:${allRows.length}');
+}
 
 // SETTINGS
 // Number of tries

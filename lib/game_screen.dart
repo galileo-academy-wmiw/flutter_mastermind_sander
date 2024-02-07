@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/score_screen.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -7,13 +9,7 @@ import 'dart:math';
 
 
 
-List<RowOfPins> allRows = [
-  RowOfPins(),
-  ];
 
-void makeNewRowOfPins() {
-  allRows.add(RowOfPins());
-}
 
 // Function that creates and returns a list of 4 unique integers between 1 and 6
 List<int> createNewCodeSnippet() {
@@ -41,31 +37,37 @@ List<int> checkCodes(inputCode) {
       controlFeedback.add(0);
     }
   }
-  controlFeedback.sort();
+  controlFeedback.sort((a, b) => b - a);
   return controlFeedback;
 }
 
 // This builds the game
 class GameScreen extends StatefulWidget {
+
+  static StreamController<bool> notifier = StreamController.broadcast();
+
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> with AutomaticKeepAliveClientMixin {
+class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Container(
         height: 2200,
         color: backgroundColor,
-        child: ListView(
-            children: allRows
+        child: StreamBuilder<bool>(
+          stream: GameScreen.notifier.stream,
+          builder: (context, _) {
+            return SingleChildScrollView(
+              child: Column(
+                  children: allRows
+              ),
+            );
+          }
         )
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 // Constructor of button to take player to ScoreScreen

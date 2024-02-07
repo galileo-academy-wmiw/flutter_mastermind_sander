@@ -16,7 +16,7 @@ class RowOfPins extends StatefulWidget {
   State<RowOfPins> createState() => _RowOfPinsState();
 }
 
-class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin {
+class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
 
   bool _active = true;
   bool _winStateAchieved = false;
@@ -49,8 +49,10 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Opacity(
       opacity: _active ? animation.value / 10 : 0.9,
       child: Padding(
@@ -79,7 +81,6 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                       child: IconButton(
                         onPressed: (){
                           setState(() {
-                            _active = false;
                             if (isSoundOn) {
                               audioPlayer.play(AssetSource(startUpSound));
                             }
@@ -91,6 +92,8 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                             } else {
                               _winStateAchieved = true;
                             }
+                            _active = false;
+                            GameScreen.notifier.add(true);
                           });
                         },
                         iconSize: 40,
@@ -141,4 +144,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
