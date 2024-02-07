@@ -22,6 +22,7 @@ const secondaryColor = Color.fromRGBO(115, 96, 223, 1);
 const lightColor = Color.fromRGBO(242, 175, 239, 1);
 const textColor = Color.fromRGBO(51, 24, 107, 1);
 const backgroundColor = Color.fromRGBO(255, 255, 255, 1.0);
+const winStateColor = Color.fromRGBO(74, 236, 127, 1.0);
 
 const codePinColor0 = backgroundColor;
 const codePinColor1 = Color.fromRGBO(242, 153, 153, 1.0);
@@ -36,7 +37,7 @@ const scorePinColor1 = Color.fromRGBO(242, 227, 153, 1.0);
 const scorePinColor2 = Color.fromRGBO(153, 242, 181, 1);
 
 // Color List
-List<Color> colorList = [
+List<Color> codePinColorList = [
   codePinColor0,
   codePinColor1,
   codePinColor2,
@@ -46,9 +47,20 @@ List<Color> colorList = [
   codePinColor6
 ];
 
+List<Color> scorePinColorList = [
+  scorePinColor0,
+  scorePinColor1,
+  scorePinColor2
+];
+
 // Codepin Color Sequence
 List<int> codePinColorSequence = [0, 0, 0, 0];
 
+// Initialize secret code
+List<int> secretCode = [];
+
+// Initialize control values list
+List<int> controlValues = [];
 // Initialize instance of AudioPlayer
 final AudioPlayer audioPlayer = AudioPlayer();
 
@@ -62,6 +74,8 @@ double numOfTries = 12;
 bool isSoundOn = true;
 // Colorblind mode on/off
 bool isColorBlindModeOn = false;
+// Dev Mode
+bool isDevModeOn = false;
 
 //PainterClass
 class PainterTest extends CustomPainter{

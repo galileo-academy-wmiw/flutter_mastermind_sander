@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mastermind_sander/game_screen.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+
 // Constructor for the widget of a row of pins that will make up the stages of the game
 class RowOfPins extends StatefulWidget {
-  final bool active;
-  const RowOfPins({super.key, this.active = false,});
+  RowOfPins({super.key});
 
 
 
@@ -17,18 +18,49 @@ class RowOfPins extends StatefulWidget {
 
 class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin {
 
+  bool _active = true;
+  bool _winStateAchieved = false;
+
+  Color colorOfCard () {
+    if (_active && _winStateAchieved) {
+      return winStateColor;
+    } else if (_active) {
+      return primaryColor;
+    } else {
+      return backgroundColor;
+    }
+  }
+
+  late Animation<double> animation;
+  late AnimationController animationController;
+
+  void initState() {
+    animationController = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 1500)
+    );
+    animation = Tween<double>(begin: 0, end: 10).animate(animationController);
+    animation.addListener(() {
+      setState(() {
+
+      });
+    });
+    animationController.forward();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: widget.active ? 1.0 : 0.2,
+      opacity: _active ? animation.value / 10 : 0.9,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-          color: widget.active ? primaryColor : backgroundColor,
+          color: colorOfCard(),
           shape: StadiumBorder(
             side: BorderSide(
               color: textColor,
-              width: widget.active ? 2.5 : 2.0,
+              width: _active ? 2.5 : 2.0,
             )
           ),
           child: Container(
@@ -36,21 +68,29 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Codepin(0, widget.active),
-                Codepin(1, widget.active),
-                Codepin(2, widget.active),
-                Codepin(3, widget.active),
+                Codepin(0, _active),
+                Codepin(1, _active),
+                Codepin(2, _active),
+                Codepin(3, _active),
                 Expanded(
                   child: Center(
                     child: IgnorePointer(
-                      ignoring: widget.active ? false : true,
+                      ignoring: _active ? false : true,
                       child: IconButton(
                         onPressed: (){
                           setState(() {
+                            _active = false;
                             if (isSoundOn) {
                               audioPlayer.play(AssetSource(startUpSound));
                             }
                             print(codePinColorSequence);
+                            controlValues = checkCodes(codePinColorSequence);
+                            print('Control values: $controlValues');
+                            if (controlValues.reduce((a, b) => a + b) < 8) {
+                              makeNewRowOfPins();
+                            } else {
+                              _winStateAchieved = true;
+                            }
                           });
                         },
                         iconSize: 40,
@@ -77,15 +117,15 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Scorepin(),
-                                Scorepin(),
+                                Scorepin(index: 0, isActive: _active,),
+                                Scorepin(index: 1, isActive: _active,),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Scorepin(),
-                                Scorepin(),
+                                Scorepin(index: 2, isActive: _active,),
+                                Scorepin(index: 3, isActive: _active,),
                               ],
                             ),
                           ],
