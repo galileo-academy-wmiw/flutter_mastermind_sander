@@ -19,10 +19,10 @@ class RowOfPins extends StatefulWidget {
 class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
 
   bool _active = true;
-  bool _winStateAchieved = false;
+
 
   Color colorOfCard () {
-    if (_active && _winStateAchieved) {
+    if (_active && winStateAchieved) {
       return winStateColor;
     } else if (_active) {
       return primaryColor;
@@ -90,7 +90,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                             if (controlValues.reduce((a, b) => a + b) < 8) {
                               makeNewRowOfPins();
                             } else {
-                              _winStateAchieved = true;
+                              winStateAchieved = true;
                             }
                             _active = false;
                             GameScreen.notifier.add(true);

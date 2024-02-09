@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/variables.dart';
+import 'main.dart';
+import 'package:audioplayers/audioplayers.dart';
 
+// The settings screen is the screen where the user can change settings for sound,
+// accessibility and difficulty.
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
@@ -28,6 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             width: 600,
             child: Column(
               children: [
+                // Button to turn sound on/off
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -52,6 +57,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ],
                   ),
                 ),
+                // Button to turn colorblind mode on/off
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -63,12 +69,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           onChanged: (value){
                             setState(() {
                               isColorBlindModeOn = !isColorBlindModeOn;
+                              resetGameState();
                             });
                           }),
                     ],
                   ),
                 ),
+                // Label for slider below
                 Text('Number of tries: $numOfTries'),
+                // Slider to set the number of tries
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Slider(
@@ -83,6 +92,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         });
                       }
                   ),
+                ),
+                // Button that applies the changes and resets the game
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const GameScreenRoute()),
+                        );
+                        if (isSoundOn) {
+                          audioPlayer.play(AssetSource(startUpSound));
+                        }
+                        resetGameState();
+                      },
+                      child: Text('Apply', style: buttonTextStyle,)),
                 )
               ],
             ),

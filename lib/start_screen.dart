@@ -44,10 +44,7 @@ class StartScreen extends StatelessWidget {
               if (isSoundOn) {
                 audioPlayer.play(AssetSource(startUpSound));
               }
-              secretCode = createNewCodeSnippet();
-              allRows = [
-                RowOfPins(),
-              ];
+              resetGameState();
             },
           ),
         ],

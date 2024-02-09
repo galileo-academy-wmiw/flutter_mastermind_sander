@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'row_of_pins.dart';
+import 'game_screen.dart';
 
 // VARIABLES
 // Text styles
@@ -79,14 +82,25 @@ const codePinClickSound = 'audio/punchy-taps-ui-9-183908.mp3';
 const startUpSound = 'audio/90s-game-ui-6-185099.mp3';
 
 
-List<RowOfPins> allRows = [
-  RowOfPins(),
-];
+List<Widget> allRows = [];
 
+// Global functions
 void makeNewRowOfPins() {
-  allRows.add(RowOfPins());
-  print('Row Added. Total Rows:${allRows.length}');
+  if (allRows.length < numOfTries) {
+    allRows.add(RowOfPins());
+    print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 1)}');
+  } else {
+    print('You lost! Loser!');
+  }
 }
+
+void resetGameState() {
+  secretCode = createNewCodeSnippet();
+  allRows.clear();
+  allRows.add(RowOfPins());
+}
+
+bool winStateAchieved = false;
 
 // SETTINGS
 // Number of tries
