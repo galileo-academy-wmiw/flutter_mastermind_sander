@@ -13,7 +13,8 @@ class Scorepin extends StatelessWidget {
       width: 25,
       height: 25,
       child: CustomPaint(
-        painter: PainterTest(isActive ? backgroundColor : scorePinColorList[controlValues[index]]),
+        painter: PainterTestCodePin(isActive ? backgroundColor : scorePinColorList[controlValues[index]],
+                            isActive ? '' : controlValues[index].toString(), scorePinTextStyle),
         size: Size(25, 25),
       ),
     );

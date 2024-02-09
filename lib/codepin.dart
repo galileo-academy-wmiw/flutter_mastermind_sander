@@ -39,7 +39,7 @@ class _CodepinState extends State<Codepin> {
                 height: 80,
                 width: 80,
                 child: CustomPaint(
-                  painter: PainterTest(codePinColorList[i]),
+                  painter: PainterTestCodePin(codePinColorList[i], i.toString(), codePinTextStyle),
                   size: Size(50, 50),
                 ),
               )

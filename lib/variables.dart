@@ -16,6 +16,16 @@ const TextStyle pTextStyle = TextStyle(
   fontFamily: 'DMMono',
   color: textColor,
 );
+const TextStyle codePinTextStyle = TextStyle(
+  fontFamily: 'DMMono',
+  color: textColor,
+  fontSize: 20
+);
+const TextStyle scorePinTextStyle = TextStyle(
+    fontFamily: 'DMMono',
+    color: textColor,
+    fontSize: 12
+);
 
 // Colors
 const primaryColor = Color.fromRGBO(196, 153, 243, 1);
@@ -89,17 +99,28 @@ bool isColorBlindModeOn = false;
 bool isDevModeOn = false;
 
 //PainterClass
-class PainterTest extends CustomPainter{
+class PainterTestCodePin extends CustomPainter{
   final Color pinColor;
-  PainterTest(this.pinColor);
+  final String pinNum;
+  final TextStyle textStyle;
+  PainterTestCodePin(this.pinColor, this.pinNum, this.textStyle);
 
   void paint (Canvas canvas, Size size){
     final paint = Paint();
+    final textPainter = TextPainter(
+      text: TextSpan(
+        text: isColorBlindModeOn ? pinNum : '',
+        style: textStyle
+      ),
+      textDirection: TextDirection.ltr
+    );
     paint.color = textColor;
     var c = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(c, size.width / 2, paint);
     paint.color = pinColor;
     canvas.drawCircle(c, size.width / 2.4, paint);
+    textPainter.layout();
+    textPainter.paint(canvas, Offset((size.width - textPainter.width) / 2, (size.height - textPainter.height) / 2));
 
   }
   bool shouldRepaint (CustomPainter oldDelegate) {
