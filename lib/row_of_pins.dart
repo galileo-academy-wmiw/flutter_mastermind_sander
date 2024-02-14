@@ -4,7 +4,6 @@ import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'dart:async';
 
 
 // Constructor for the widget of a row of pins that will make up the stages of the game
