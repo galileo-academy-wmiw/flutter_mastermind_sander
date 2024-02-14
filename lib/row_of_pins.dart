@@ -10,8 +10,6 @@ import 'package:audioplayers/audioplayers.dart';
 class RowOfPins extends StatefulWidget {
   RowOfPins({super.key});
 
-
-
   @override
   State<RowOfPins> createState() => _RowOfPinsState();
 }
@@ -19,7 +17,6 @@ class RowOfPins extends StatefulWidget {
 class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
 
   bool _active = true;
-
 
   Color colorOfCard () {
     if (_active && winStateAchieved) {
@@ -47,6 +44,48 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
     });
     animationController.forward();
     super.initState();
+  }
+
+  void endTurn() {
+    print(codePinColorSequence);
+    // If-statement to check if input is correct (4 non-zero values):
+    if (codePinColorSequence.contains(0)) {// Code to execute if input is incorrect:
+      // Plays sound
+      if (isSoundOn) {
+        audioPlayer.play(AssetSource(startUpSound));
+        // TODO: Change sound to something that indicates an error
+      };
+      // TODO: Add feedback to convey to user that the input is incorrect
+    } else {// Perform next checks
+      // Plays sound
+      if (isSoundOn) {
+        audioPlayer.play(AssetSource(startUpSound));
+      };
+      // Checks input against secret code and creates list with feedback values
+      controlValues = checkCodes(codePinColorSequence);
+      print('Control values: $controlValues');
+      // Only if all 4 values are '2', the code is correct. This if-statement checks if the control values add up to 4 * 2 = 8
+      if (controlValues.reduce((a, b) => a + b) < 8) {// If true, win condition not achieved yet
+        // Check if user has tries left
+        if (numOfTries - allRows.length > 0) {// If true, allow user to try again
+          makeNewRowOfPins();
+          codePinColorSequence = [0, 0, 0, 0];
+          _active = false;
+          GameScreen.notifier.add(true);
+        } else {// If false, lose condition achieved
+          print('You lost! You fool!');
+          // TODO: Implement UI for losing the game
+        }
+      } else {// If false, win condition achieved
+        winStateAchieved = true;
+      }
+      // Makes the row non-interactive and notifies GameScreen to rebuild element with new state
+
+
+    }
+
+
+
   }
 
 
@@ -81,19 +120,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                       child: IconButton(
                         onPressed: (){
                           setState(() {
-                            if (isSoundOn) {
-                              audioPlayer.play(AssetSource(startUpSound));
-                            }
-                            print(codePinColorSequence);
-                            controlValues = checkCodes(codePinColorSequence);
-                            print('Control values: $controlValues');
-                            if (controlValues.reduce((a, b) => a + b) < 8) {
-                              makeNewRowOfPins();
-                            } else {
-                              winStateAchieved = true;
-                            }
-                            _active = false;
-                            GameScreen.notifier.add(true);
+                            endTurn();
                           });
                         },
                         iconSize: 40,

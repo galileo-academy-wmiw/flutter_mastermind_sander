@@ -86,12 +86,8 @@ List<Widget> allRows = [];
 
 // Global functions
 void makeNewRowOfPins() {
-  if (allRows.length < numOfTries) {
-    allRows.add(RowOfPins());
-    print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 1)}');
-  } else {
-    print('You lost! Loser!');
-  }
+  allRows.add(RowOfPins());
+  print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 1)}');
 }
 
 void resetGameState() {
