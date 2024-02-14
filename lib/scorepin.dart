@@ -9,14 +9,23 @@ class Scorepin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 25,
-      height: 25,
-      child: CustomPaint(
-        painter: PainterTestCodePin(isActive ? backgroundColor : scorePinColorList[controlValues[index]],
-                            isActive ? '' : controlValues[index].toString(), scorePinTextStyle),
-        size: Size(25, 25),
-      ),
-    );
+    if (isActive) {
+      return Container(
+        width: 25,
+        height: 25,
+      );
+    } else {
+      return Container(
+        width: 25,
+        height: 25,
+        child: CustomPaint(
+          painter: PainterTestCodePin(
+              scorePinColorList[controlValues[index]],
+              controlValues[index].toString(),
+              scorePinTextStyle),
+          size: Size(25, 25),
+        ),
+      );
+    }
   }
 }

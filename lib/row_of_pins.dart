@@ -4,6 +4,7 @@ import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'dart:async';
 
 
 // Constructor for the widget of a row of pins that will make up the stages of the game
@@ -68,9 +69,10 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
       if (controlValues.reduce((a, b) => a + b) < 8) {// If true, win condition not achieved yet
         // Check if user has tries left
         if (numOfTries - allRows.length > 0) {// If true, allow user to try again
+          _active = false;
           makeNewRowOfPins();
           codePinColorSequence = [0, 0, 0, 0];
-          _active = false;
+
           GameScreen.notifier.add(true);
         } else {// If false, lose condition achieved
           print('You lost! You fool!');
