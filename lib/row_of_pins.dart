@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/game_screen.dart';
+import 'package:flutter_mastermind_sander/score_screen.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
@@ -46,6 +47,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
     super.initState();
   }
 
+  // This function describes what happens after the submit button is clicked
   void endTurn() {
     print(codePinColorSequence);
     // If-statement to check if input is correct (4 non-zero values):
@@ -79,14 +81,10 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         }
       } else {// If false, win condition achieved
         winStateAchieved = true;
+        Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ScoreScreen()));
       }
-      // Makes the row non-interactive and notifies GameScreen to rebuild element with new state
-
-
     }
-
-
-
   }
 
 

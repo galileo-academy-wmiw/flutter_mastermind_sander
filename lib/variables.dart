@@ -91,6 +91,7 @@ void makeNewRowOfPins() {
 }
 
 void resetGameState() {
+  winStateAchieved = false;
   secretCode = createNewCodeSnippet();
   allRows.clear();
   allRows.add(RowOfPins());
