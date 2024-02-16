@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'variables.dart';
-import 'row_of_pins.dart';
 import 'dart:async';
+
+
 
 class Scorepin extends StatefulWidget {
   final int index;
@@ -16,23 +17,36 @@ class _ScorepinState extends State<Scorepin> {
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.isActive) {
-      return Container(
-        width: 25,
-        height: 25,
-        child: CustomPaint(
-          painter: PainterTestCodePin(
-              scorePinColorList[controlValues[widget.index]],
-              controlValues[widget.index].toString(),
-              scorePinTextStyle),
-          size: Size(25, 25),
+    Future<Widget> scorePinAppear = Future.delayed(Duration(seconds: 1 + (widget.index)), () {
+      if (!widget.isActive) {
+        return Container(
+          width: 25,
+          height: 25,
+          child: CustomPaint(
+            painter: PainterTestCodePin(
+                scorePinColorList[controlValues[widget.index]],
+                controlValues[widget.index].toString(),
+                scorePinTextStyle),
+            size: Size(25, 25),
+          ),
+        );
+      } else {
+        return Container(
+          width: 25,
+          height: 25,
+        );
+      }
+    });
+    return FutureBuilder(
+        initialData: Container(
+          width: 25,
+          height: 25,
         ),
-      );
-    } else {
-      return Container(
-        width: 25,
-        height: 25,
-      );
-    }
+        future: scorePinAppear,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return snapshot.data;
+        }
+    );
+
   }
 }

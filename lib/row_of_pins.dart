@@ -54,13 +54,13 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
       if (isSoundOn) {
         audioPlayer.play(AssetSource(startUpSound));
         // TODO: Change sound to something that indicates an error
-      };
+      }
       // TODO: Add feedback to convey to user that the input is incorrect
     } else {// Perform next checks
       // Plays sound
       if (isSoundOn) {
         audioPlayer.play(AssetSource(startUpSound));
-      };
+      }
       // Checks input against secret code and creates list with feedback values
       controlValues = checkCodes(codePinColorSequence);
       print('Control values: $controlValues');

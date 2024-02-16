@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/game_screen.dart';
 import 'package:flutter_mastermind_sander/main.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_mastermind_sander/variables.dart';
-import 'row_of_pins.dart';
 
 class MastermindLogo extends StatelessWidget {
   const MastermindLogo({super.key});
