@@ -5,11 +5,14 @@ import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'dart:async';
 
 
 // Constructor for the widget of a row of pins that will make up the stages of the game
 class RowOfPins extends StatefulWidget {
-  RowOfPins({super.key});
+  final List<int> codePinValues;
+  final bool isForShowPurpose;
+  RowOfPins({super.key, this.codePinValues = const [0, 0, 0, 0], this.isForShowPurpose = false});
 
   @override
   State<RowOfPins> createState() => _RowOfPinsState();
@@ -21,9 +24,9 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
 
   Color colorOfCard () {
     if (_active && winStateAchieved) {
-      return winStateColor;
+      return textColor;
     } else if (_active) {
-      return primaryColor;
+      return lightColor;
     } else {
       return backgroundColor;
     }
@@ -71,10 +74,13 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         // Check if user has tries left
         if (numOfTries - allRows.length > 0) {// If true, allow user to try again
           _active = false;
-          makeNewRowOfPins();
-          codePinColorSequence = [0, 0, 0, 0];
+          Timer(Duration(milliseconds: 1700), () {
+            makeNewRowOfPins();
+            codePinColorSequence = [0, 0, 0, 0];
+            GameScreen.notifier.add(true);
+          });
 
-          GameScreen.notifier.add(true);
+
         } else {// If false, lose condition achieved
           print('You lost! You fool!');
           // TODO: Implement UI for losing the game
@@ -103,69 +109,81 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
               width: _active ? 2.5 : 2.0,
             )
           ),
-          child: Container(
-            height: 120,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Codepin(0, _active),
-                Codepin(1, _active),
-                Codepin(2, _active),
-                Codepin(3, _active),
-                Expanded(
-                  child: Center(
-                    child: IgnorePointer(
-                      ignoring: _active ? false : true,
-                      child: IconButton(
-                        onPressed: (){
-                          setState(() {
-                            endTurn();
-                          });
-                        },
-                        iconSize: 40,
-                        color: textColor,
-                        icon: const Icon(
-                            Icons.play_arrow
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 80,
-                    width: 120,
+          child: (widget.isForShowPurpose) ?
+            Container(
+              height: 120,
+              child: Row(
+                children: [
+                  Codepin(index: 0, isActive: false, startValue: widget.codePinValues[0],),
+                  Codepin(index: 1, isActive: false, startValue: widget.codePinValues[1],),
+                  Codepin(index: 2, isActive: false, startValue: widget.codePinValues[2],),
+                  Codepin(index: 3, isActive: false, startValue: widget.codePinValues[3],),
+                ],
+              ),
+            ) :
+            Container(
+              height: 120,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Codepin(index: 0, isActive: _active),
+                  Codepin(index: 1, isActive: _active),
+                  Codepin(index: 2, isActive: _active),
+                  Codepin(index: 3, isActive: _active),
+                  Expanded(
                     child: Center(
-                      child: Container(
-                        width: 80,
-                        height: 80,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Scorepin(index: 0, isActive: _active,),
-                                Scorepin(index: 1, isActive: _active,),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Scorepin(index: 2, isActive: _active,),
-                                Scorepin(index: 3, isActive: _active,),
-                              ],
-                            ),
-                          ],
+                      child: IgnorePointer(
+                        ignoring: _active ? false : true,
+                        child: IconButton(
+                          onPressed: (){
+                            setState(() {
+                              endTurn();
+                            });
+                          },
+                          iconSize: 40,
+                          color: textColor,
+                          icon: const Icon(
+                              Icons.play_arrow
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: Container(
+                      height: 80,
+                      width: 120,
+                      child: Center(
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Scorepin(index: 0, isActive: _active,),
+                                  Scorepin(index: 1, isActive: _active,),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
+                                  Scorepin(index: 2, isActive: _active,),
+                                  Scorepin(index: 3, isActive: _active,),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
         ),
       ),
     );
@@ -174,3 +192,4 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
   @override
   bool get wantKeepAlive => true;
 }
+

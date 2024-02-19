@@ -70,34 +70,3 @@ class _GameScreenState extends State<GameScreen> {
   }
 }
 
-// Constructor of button to take player to ScoreScreen
-class ScoreScreenButton extends StatelessWidget {
-  const ScoreScreenButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.scoreboard),
-              Text("Check your score!", style: buttonTextStyle),
-            ],
-          ),
-        ),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ScoreScreen())
-          );
-          if (isSoundOn) {
-            audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
-          }
-        },
-      ),
-    );
-  }
-}

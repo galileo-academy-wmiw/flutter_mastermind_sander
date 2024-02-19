@@ -8,8 +8,9 @@ import 'game_screen.dart';
 class Codepin extends StatefulWidget {
   final int index;
   final bool isActive;
+  final int startValue;
 
-  Codepin(this.index, this.isActive);
+  Codepin({this.index = 0, this.isActive = true, this.startValue = 0});
 
   @override
   State<Codepin> createState() => _CodepinState();
@@ -20,6 +21,7 @@ class _CodepinState extends State<Codepin> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.startValue != 0) i = widget.startValue;
     return Expanded(
         child: Center(
           child: IgnorePointer(

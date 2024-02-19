@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'row_of_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'row_of_pins.dart';
@@ -87,13 +87,14 @@ List<Widget> allRows = [];
 // Global functions
 void makeNewRowOfPins() {
   allRows.add(RowOfPins());
-  print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 1)}');
+  print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 2)}');
 }
 
 void resetGameState() {
   winStateAchieved = false;
   secretCode = createNewCodeSnippet();
   allRows.clear();
+  allRows.add(FeedbackRow());
   allRows.add(RowOfPins());
 }
 

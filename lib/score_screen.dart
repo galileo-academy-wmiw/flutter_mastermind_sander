@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_mastermind_sander/row_of_pins.dart';
 import 'variables.dart';
 import 'main.dart';
 
@@ -13,12 +14,14 @@ class _ScoreScreenState extends State<ScoreScreen> {
     return DefaultTextStyle(
       style: pTextStyle,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
             padding: EdgeInsets.all(18.0),
             // TODO: Text is a placeholder
             child: Text('Placeholder text'),
+          ),
+          Container(
+            child: RowOfPins(isForShowPurpose: true, codePinValues: secretCode,),
           ),
           Center(
               child: ElevatedButton(

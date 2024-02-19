@@ -17,7 +17,7 @@ class _ScorepinState extends State<Scorepin> {
 
   @override
   Widget build(BuildContext context) {
-    Future<Widget> scorePinAppear = Future.delayed(Duration(seconds: 1 + (widget.index)), () {
+    Future<Widget> scorePinAppear = Future.delayed(Duration(milliseconds: widget.isActive ? 0 : 1500 - (controlValues[widget.index] * 500)), () {
       if (!widget.isActive) {
         return Container(
           width: 25,
