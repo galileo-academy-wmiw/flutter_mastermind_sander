@@ -75,6 +75,103 @@ List<int> secretCode = [];
 
 // Initialize control values list
 List<int> controlValues = [];
+
+// List with rows to put high scores in
+List<TableRow> highScores = [
+  TableRow(
+    children: <Widget>[
+      Container(
+          alignment: Alignment.center,
+          height: 20,
+          child: Text('Date')),
+      Container(
+          alignment: Alignment.center,
+          height: 20,
+          child: Text('Score'))
+    ]
+  ),
+  TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 1 ? Text('')
+                    : Text(highScoresValues[0][0].toString())
+        ),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 1 ? Text('')
+                    : Text(highScoresValues[0][1].toString())
+        )]
+  ),
+  TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 2 ? Text('')
+                : Text(highScoresValues[1][0].toString())
+        ),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 2 ? Text('')
+                : Text(highScoresValues[1][1].toString())
+        )]
+  ),
+  TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 3 ? Text('')
+                : Text(highScoresValues[2][0].toString())
+        ),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 3 ? Text('')
+                : Text(highScoresValues[2][1].toString())
+        )]
+  ),
+  TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 4 ? Text('')
+                : Text(highScoresValues[3][0].toString())
+        ),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 4 ? Text('')
+                : Text(highScoresValues[3][1].toString())
+        )]
+  ),
+  TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 5 ? Text('')
+                : Text(highScoresValues[4][0].toString())
+        ),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: highScoresValues.length < 5 ? Text('')
+                : Text(highScoresValues[4][1].toString())
+        )]
+  ),
+
+];
+
+
+// Empty list that will contain high scores
+List<List> highScoresValues = [];
+
 // Initialize instance of AudioPlayer
 final AudioPlayer audioPlayer = AudioPlayer();
 
@@ -87,14 +184,13 @@ List<Widget> allRows = [];
 // Global functions
 void makeNewRowOfPins() {
   allRows.add(RowOfPins());
-  print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 2)}');
+  print('Row Added. Total Rows:${allRows.length}. Tries left: ${numOfTries - (allRows.length - 1)}');
 }
 
 void resetGameState() {
   winStateAchieved = false;
   secretCode = createNewCodeSnippet();
   allRows.clear();
-  allRows.add(FeedbackRow());
   allRows.add(RowOfPins());
 }
 
@@ -130,7 +226,7 @@ class PainterTestCodePin extends CustomPainter{
     var c = Offset(size.width / 2, size.height / 2);
     canvas.drawCircle(c, size.width / 2, paint);
     paint.color = pinColor;
-    canvas.drawCircle(c, size.width / 2.4, paint);
+    canvas.drawCircle(c, size.width / 2.3, paint);
     textPainter.layout();
     textPainter.paint(canvas, Offset((size.width - textPainter.width) / 2, (size.height - textPainter.height) / 2));
 

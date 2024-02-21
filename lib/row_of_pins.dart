@@ -24,7 +24,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
 
   Color colorOfCard () {
     if (_active && winStateAchieved) {
-      return textColor;
+      return lightColor;
     } else if (_active) {
       return lightColor;
     } else {
@@ -74,7 +74,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         // Check if user has tries left
         if (numOfTries - allRows.length > 0) {// If true, allow user to try again
           _active = false;
-          Timer(Duration(milliseconds: 1700), () {
+          Timer(Duration(milliseconds: 1700), () async {
             makeNewRowOfPins();
             codePinColorSequence = [0, 0, 0, 0];
             GameScreen.notifier.add(true);
@@ -83,10 +83,16 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
 
         } else {// If false, lose condition achieved
           print('You lost! You fool!');
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ScoreScreen()));
           // TODO: Implement UI for losing the game
         }
       } else {// If false, win condition achieved
+        // TODO: Delay going to the score screen
         winStateAchieved = true;
+        setState(() {
+          highScoresValues.add([DateTime.now(), 'Placeholder']);
+        });
         Navigator.push(context,
         MaterialPageRoute(builder: (context) => ScoreScreen()));
       }
@@ -121,67 +127,70 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
                 ],
               ),
             ) :
-            Container(
-              height: 120,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Codepin(index: 0, isActive: _active),
-                  Codepin(index: 1, isActive: _active),
-                  Codepin(index: 2, isActive: _active),
-                  Codepin(index: 3, isActive: _active),
-                  Expanded(
-                    child: Center(
-                      child: IgnorePointer(
-                        ignoring: _active ? false : true,
-                        child: IconButton(
-                          onPressed: (){
-                            setState(() {
-                              endTurn();
-                            });
-                          },
-                          iconSize: 40,
-                          color: textColor,
-                          icon: const Icon(
-                              Icons.play_arrow
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 80,
-                      width: 120,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+              child: Container(
+                height: 120,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Codepin(index: 0, isActive: _active),
+                    Codepin(index: 1, isActive: _active),
+                    Codepin(index: 2, isActive: _active),
+                    Codepin(index: 3, isActive: _active),
+                    Expanded(
                       child: Center(
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Scorepin(index: 0, isActive: _active,),
-                                  Scorepin(index: 1, isActive: _active,),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Scorepin(index: 2, isActive: _active,),
-                                  Scorepin(index: 3, isActive: _active,),
-                                ],
-                              ),
-                            ],
+                        child: IgnorePointer(
+                          ignoring: _active ? false : true,
+                          child: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                endTurn();
+                              });
+                            },
+                            iconSize: 40,
+                            color: textColor,
+                            icon: const Icon(
+                                Icons.play_arrow
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: Container(
+                        height: 80,
+                        width: 120,
+                        child: Center(
+                          child: Container(
+                            width: 80,
+                            height: 80,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Scorepin(index: 0, isActive: _active,),
+                                    Scorepin(index: 1, isActive: _active,),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Scorepin(index: 2, isActive: _active,),
+                                    Scorepin(index: 3, isActive: _active,),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
         ),

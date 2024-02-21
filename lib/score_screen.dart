@@ -13,43 +13,75 @@ class _ScoreScreenState extends State<ScoreScreen> {
   Widget build(BuildContext context) {
     return DefaultTextStyle(
       style: pTextStyle,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(18.0),
-            // TODO: Text is a placeholder
-            child: Text('Placeholder text'),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: textColor,
+          title: const Text("S C O R E", style: appBarTextStyle),
+          centerTitle: true,
+          iconTheme: IconThemeData(
+            color: backgroundColor,
           ),
-          Container(
-            child: RowOfPins(isForShowPurpose: true, codePinValues: secretCode,),
-          ),
-          Center(
-              child: ElevatedButton(
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.arrow_back),
-                      Text("Play again!", style: buttonTextStyle,),
-                    ],
-                  ),
+        ),
+        body: Container(
+          height: 2500,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(18.0),
+                // TODO: Text is a placeholder
+                child: Text(
+                  winStateAchieved ? 'Congratulations! You found my secret code!'
+                      : 'Game over! My genius remains unmatched! This was my secret code:'
                 ),
-                onPressed: () {
-                  setState(() {
-                    // Return to GameScreen
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const GameScreenRoute()));
-                    resetGameState();
-                    if (isSoundOn) {
-                      // TODO: Sound is a placeholder
-                      audioPlayer.play(AssetSource(codePinClickSound));
-                    }
-                  });
-                },
-              )
+              ),
+              winStateAchieved ?
+              Container() :
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 140.0, vertical: 8.0),
+                child: RowOfPins(isForShowPurpose: true, codePinValues: secretCode,),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 140.0, vertical: 8.0),
+                child: Table(
+                  columnWidths: <int, TableColumnWidth>{
+                    0: FlexColumnWidth(),
+                    1: FlexColumnWidth(),
+                  },
+                  children: highScores,
+                ),
+              ),
+              Center(
+                  child: ElevatedButton(
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.arrow_back),
+                          Text("Play again!", style: buttonTextStyle,),
+                        ],
+                      ),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        // Return to GameScreen
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const GameScreenRoute()));
+                        resetGameState();
+                        if (isSoundOn) {
+                          // TODO: Sound is a placeholder
+                          audioPlayer.play(AssetSource(codePinClickSound));
+                        }
+                      });
+                    },
+                  )
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

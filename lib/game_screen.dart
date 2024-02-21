@@ -1,11 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/score_screen.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'variables.dart';
-import 'row_of_pins.dart';
 import 'dart:math';
+import 'row_of_feedback.dart';
 
 
 
@@ -46,23 +43,33 @@ class GameScreen extends StatefulWidget {
 
   static StreamController<bool> notifier = StreamController.broadcast();
 
+
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 2200,
+        height: 2800,
         color: backgroundColor,
         child: StreamBuilder<bool>(
           stream: GameScreen.notifier.stream,
           builder: (context, _) {
-            return SingleChildScrollView(
-              child: Column(
-                  children: allRows
-              ),
+            return Column(
+              children: [
+                FeedbackRow(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: allRows
+                    ),
+                  ),
+                ),
+              ],
             );
           }
         )

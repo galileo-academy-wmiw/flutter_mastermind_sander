@@ -13,42 +13,61 @@ class FeedbackRow extends StatefulWidget {
 }
 
 class _FeedbackRowState extends State<FeedbackRow> {
+  int i = 0;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: textColor,
-        shape: StadiumBorder(
-          side: BorderSide(
-            color: textColor,
-            width: 2.5
-          )
-        ),
-        child: Column(
-          children: [
-            Container(
-              height: 50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  StreamBuilder<Object>(
-                    stream: GameScreen.notifier.stream,
-                    builder: (context, snapshot) {
-                      return Text('Tries left: ${numOfTries - (allRows.length - 2)}',
-                      style: appBarTextStyle,);
-                    }
-                  ),
-                  ScoreScreenButton()
-                ],
-              ),
-            ),
-            Container(
-              height: 50,
-              child: Text(feedbackList[0], style: appBarTextStyle,),
+      child: Container(
+        child: Card(
+          color: textColor,
+          shape: StadiumBorder(
+            side: BorderSide(
+              color: textColor,
+              width: 2.5
             )
-          ],
+          ),
+          child: Container(
+            height: 160,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      StreamBuilder<Object>(
+                        stream: GameScreen.notifier.stream,
+                        builder: (context, snapshot) {
+                          return Text('Tries left: ${numOfTries - (allRows.length - 1)}',
+                          style: appBarTextStyle,);
+                        }
+                      ),
+                      ScoreScreenButton()
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 40.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                            child: Text(feedbackList[i],
+                              style: appBarTextStyle,
+                              textAlign: TextAlign.center,
+                            )
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -69,7 +88,7 @@ class ScoreScreenButton extends StatelessWidget {
             MaterialPageRoute(builder: (context) => ScoreScreen())
         );
         if (isSoundOn) {
-          audioPlayer.play(AssetSource('audio/up-chime-2.mp3'));
+          audioPlayer.play(AssetSource('audio/90s-game-ui-6-185099.mp3'));
         }
       },
     );
@@ -77,5 +96,5 @@ class ScoreScreenButton extends StatelessWidget {
 }
 
 List<String> feedbackList = [
-  'Welcome to Mastermind! In this game you will have to guess my secret code of four colors'
+  'Welcome to Mastermind! In this game you will have to guess my secret code of four colors! Change the color of the circles by clicking on them!'
 ];
