@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/game_screen.dart';
 import 'package:flutter_mastermind_sander/score_screen.dart';
+import 'package:intl/intl.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
 import 'variables.dart';
@@ -91,7 +92,14 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         // TODO: Delay going to the score screen
         winStateAchieved = true;
         setState(() {
-          highScoresValues.add([DateTime.now(), 'Placeholder']);
+          highScoreNumValue = ((numOfTries - allRows.length) * 10).toString();
+          formattedDate = DateFormat('yyyy-MM-dd - kk:mm').format(DateTime.now());
+          // Add new high score to list on score screen
+          highScoresValues.add([formattedDate, highScoreNumValue]);
+          highScoresValues.sort((a, b) => b[1].compareTo(a[1]));
+          highScores = highScoresValues.map((highScore) {
+            return tableRowHighScore(highScore);
+          }).toList();
         });
         Navigator.push(context,
         MaterialPageRoute(builder: (context) => ScoreScreen()));

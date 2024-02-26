@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'row_of_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'row_of_pins.dart';
@@ -76,101 +75,30 @@ List<int> secretCode = [];
 // Initialize control values list
 List<int> controlValues = [];
 
-// List with rows to put high scores in
-List<TableRow> highScores = [
-  TableRow(
-    children: <Widget>[
-      Container(
-          alignment: Alignment.center,
-          height: 20,
-          child: Text('Date')),
-      Container(
-          alignment: Alignment.center,
-          height: 20,
-          child: Text('Score'))
-    ]
-  ),
-  TableRow(
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 1 ? Text('')
-                    : Text(highScoresValues[0][0].toString())
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 1 ? Text('')
-                    : Text(highScoresValues[0][1].toString())
-        )]
-  ),
-  TableRow(
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 2 ? Text('')
-                : Text(highScoresValues[1][0].toString())
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 2 ? Text('')
-                : Text(highScoresValues[1][1].toString())
-        )]
-  ),
-  TableRow(
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 3 ? Text('')
-                : Text(highScoresValues[2][0].toString())
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 3 ? Text('')
-                : Text(highScoresValues[2][1].toString())
-        )]
-  ),
-  TableRow(
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 4 ? Text('')
-                : Text(highScoresValues[3][0].toString())
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 4 ? Text('')
-                : Text(highScoresValues[3][1].toString())
-        )]
-  ),
-  TableRow(
-      children: <Widget>[
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 5 ? Text('')
-                : Text(highScoresValues[4][0].toString())
-        ),
-        Container(
-            alignment: Alignment.center,
-            height: 20,
-            child: highScoresValues.length < 5 ? Text('')
-                : Text(highScoresValues[4][1].toString())
-        )]
-  ),
+// High Score Table
+List<TableRow> highScores = [];
 
+var tableRowHighScore = (highScore) {
+  return TableRow(
+      children: <Widget>[
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: Text(highScore[0].toString())),
+        Container(
+            alignment: Alignment.center,
+            height: 20,
+            child: Text(highScore[1].toString()))
+      ]
+  );
+};
+
+List<List> highScoresValues = [
+  ['Date', 'Score']
 ];
 
-
-// Empty list that will contain high scores
-List<List> highScoresValues = [];
+String formattedDate = '';
+String highScoreNumValue = '';
 
 // Initialize instance of AudioPlayer
 final AudioPlayer audioPlayer = AudioPlayer();
