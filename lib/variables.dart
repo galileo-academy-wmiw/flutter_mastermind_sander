@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'row_of_pins.dart';
 import 'game_screen.dart';
 
@@ -133,6 +134,18 @@ bool isSoundOn = true;
 bool isColorBlindModeOn = false;
 // Dev Mode
 bool isDevModeOn = false;
+
+// Store settings with Shared Preferences
+Future<void> save(String name, bool valueBool) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setBool(name, valueBool);
+}
+
+Future<bool?> read(String name) async {
+  final prefs = await SharedPreferences.getInstance();
+  final value = prefs.getBool(name);
+  return value;
+}
 
 //PainterClass
 class PainterTestCodePin extends CustomPainter{

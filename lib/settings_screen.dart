@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mastermind_sander/variables.dart';
 import 'main.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // The settings screen is the screen where the user can change settings for sound,
 // accessibility and difficulty.
@@ -13,6 +14,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
 
   @override
   Widget build(BuildContext context) {
