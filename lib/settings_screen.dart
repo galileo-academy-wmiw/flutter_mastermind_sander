@@ -104,6 +104,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           context,
                           MaterialPageRoute(builder: (context) => const GameScreenRoute()),
                         );
+                        saveDouble('numOfTries', numOfTries);
+                        saveBool('isSoundOn', isSoundOn);
+                        saveBool('isColorBlindModeOn', isColorBlindModeOn);
+                        saveBool('isDevModeOn', isDevModeOn);
                         if (isSoundOn) {
                           audioPlayer.play(AssetSource(startUpSound));
                         }

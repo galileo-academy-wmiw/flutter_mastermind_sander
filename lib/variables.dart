@@ -94,12 +94,22 @@ var tableRowHighScore = (highScore) {
   );
 };
 
-List<List> highScoresValues = [
-  ['Date', 'Score']
-];
+List<List> highScoresValues = [];
+List<String> highScoresStringList = [];
 
 String formattedDate = '';
 String highScoreNumValue = '';
+
+Future<dynamic> saveList(String name, var list) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setStringList(name, list);
+}
+
+Future<dynamic> readList(String name) async {
+  final prefs = await SharedPreferences.getInstance();
+  final list = prefs.getStringList(name);
+  return list;
+}
 
 // Initialize instance of AudioPlayer
 final AudioPlayer audioPlayer = AudioPlayer();
@@ -136,14 +146,25 @@ bool isColorBlindModeOn = false;
 bool isDevModeOn = false;
 
 // Store settings with Shared Preferences
-Future<void> save(String name, bool valueBool) async {
+Future<dynamic> saveBool(String name, var value) async {
   final prefs = await SharedPreferences.getInstance();
-  prefs.setBool(name, valueBool);
+  prefs.setBool(name, value);
 }
 
-Future<bool?> read(String name) async {
+Future<dynamic> saveDouble(String name, var value) async {
   final prefs = await SharedPreferences.getInstance();
-  final value = prefs.getBool(name);
+  prefs.setDouble(name, value);
+}
+
+Future<bool?> readBool(String name) async {
+  final prefs = await SharedPreferences.getInstance();
+  final bool? value = prefs.getBool(name);
+  return value;
+}
+
+Future<double?> readDouble(String name) async {
+  final prefs = await SharedPreferences.getInstance();
+  final double? value = prefs.getDouble(name);
   return value;
 }
 

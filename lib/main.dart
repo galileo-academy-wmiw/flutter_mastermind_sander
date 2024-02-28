@@ -15,6 +15,19 @@ class MastermindApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    readDouble('numOfTries').then((value) => numOfTries = value!);
+    readBool('isSoundOn').then((value) => isSoundOn = value!);
+    readBool('isColorBlindModeOn').then((value) => isColorBlindModeOn = value!);
+    readBool('isDevModeOn').then((value) => isDevModeOn = value!);
+
+    readList('highScoresStringList').then((value) => highScoresStringList = value ?? []);
+    highScoresValues = highScoresStringList.map((e) {
+      List<String> parts = e.split(',');
+      String date = parts[0];
+      String score = parts[1];
+
+      return [date, score];
+    }).toList();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const StartScreenRoute(),

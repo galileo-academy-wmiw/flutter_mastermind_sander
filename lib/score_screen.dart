@@ -11,6 +11,7 @@ class ScoreScreen extends StatefulWidget {
 
 class _ScoreScreenState extends State<ScoreScreen> {
   Widget build(BuildContext context) {
+
     return DefaultTextStyle(
       style: pTextStyle,
       child: Scaffold(
@@ -60,7 +61,7 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     onPressed: () {
                       setState(() {
                         highScoresValues.clear();
-                        highScoresValues.add(['Date', 'Score']);
+                        // highScoresValues.add(['Date', 'Score']);
                         highScores.clear();
                         highScores = highScoresValues.map((highScore) {
                           return tableRowHighScore(highScore);

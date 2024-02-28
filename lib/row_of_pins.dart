@@ -93,13 +93,25 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         winStateAchieved = true;
         setState(() {
           highScoreNumValue = ((numOfTries - allRows.length) * 10).toString();
-          formattedDate = DateFormat('yyyy-MM-dd - kk:mm').format(DateTime.now());
+          formattedDate = DateFormat('kk:mm - dd-MM-yyyy').format(DateTime.now());
           // Add new high score to list on score screen
           highScoresValues.add([formattedDate, highScoreNumValue]);
           highScoresValues.sort((a, b) => b[1].compareTo(a[1]));
-          highScores = highScoresValues.map((highScore) {
+          while (highScoresValues.length > 11) {
+            setState(() {
+              highScoresValues.removeLast();
+            });
+          }
+          List<List> finalHighScoresList = [
+            ['Date', 'Score'], ...highScoresValues
+          ];
+          highScores = finalHighScoresList.map((highScore) {
             return tableRowHighScore(highScore);
           }).toList();
+          highScoresStringList = highScoresValues.map((e) {
+            return '$e[0],$e[1]';
+          }).toList();
+          saveList('highScoresStringList', highScoresStringList);
         });
         Navigator.push(context,
         MaterialPageRoute(builder: (context) => ScoreScreen()));
