@@ -1,9 +1,8 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'row_of_pins.dart';
-import 'game_screen.dart';
+import 'widgets/row_of_pins.dart';
+import 'screens/game_screen.dart';
 
 // VARIABLES
 // Text styles
@@ -94,18 +93,19 @@ var tableRowHighScore = (highScore) {
   );
 };
 
-List<List> highScoresValues = [];
+List<List<String>> highScoresValues = [];
 List<String> highScoresStringList = [];
 
 String formattedDate = '';
 String highScoreNumValue = '';
 
-Future<dynamic> saveList(String name, var list) async {
+Future<dynamic> saveList(String name, List<String> list) async {
   final prefs = await SharedPreferences.getInstance();
+  for(final s in list) print(s);
   prefs.setStringList(name, list);
 }
 
-Future<dynamic> readList(String name) async {
+Future<List<String>?> readList<T>(String name) async {
   final prefs = await SharedPreferences.getInstance();
   final list = prefs.getStringList(name);
   return list;
@@ -156,16 +156,14 @@ Future<dynamic> saveDouble(String name, var value) async {
   prefs.setDouble(name, value);
 }
 
-Future<bool?> readBool(String name) async {
+Future<bool> readBool(String name, bool initBool) async {
   final prefs = await SharedPreferences.getInstance();
-  final bool? value = prefs.getBool(name);
-  return value;
+  return prefs.getBool(name) ?? initBool;
 }
 
-Future<double?> readDouble(String name) async {
+Future<double> readDouble(String name, double initDouble) async {
   final prefs = await SharedPreferences.getInstance();
-  final double? value = prefs.getDouble(name);
-  return value;
+  return prefs.getDouble(name) ?? initDouble;
 }
 
 //PainterClass

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/game_screen.dart';
-import 'package:flutter_mastermind_sander/score_screen.dart';
+import 'package:flutter_mastermind_sander/screens/game_screen.dart';
+import 'package:flutter_mastermind_sander/screens/score_screen.dart';
 import 'package:intl/intl.dart';
+import '../streams/stream_logic.dart';
 import 'codepin.dart';
 import 'scorepin.dart';
-import 'variables.dart';
+import '../variables.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'dart:async';
 
@@ -61,7 +62,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
         audioPlayer.play(AssetSource(startUpSound));
         // TODO: Change sound to something that indicates an error
       }
-      // TODO: Add feedback to convey to user that the input is incorrect
+      StreamLogic.errorMessage();
     } else {// Perform next checks
       // Plays sound
       if (isSoundOn) {
@@ -95,7 +96,7 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
           highScoreNumValue = ((numOfTries - allRows.length) * 10).toString();
           formattedDate = DateFormat('kk:mm - dd-MM-yyyy').format(DateTime.now());
           // Add new high score to list on score screen
-          highScoresValues.add([formattedDate, highScoreNumValue]);
+          highScoresValues.add(<String>[formattedDate, highScoreNumValue]);
           highScoresValues.sort((a, b) => b[1].compareTo(a[1]));
           while (highScoresValues.length > 11) {
             setState(() {
@@ -109,12 +110,11 @@ class _RowOfPinsState extends State<RowOfPins> with SingleTickerProviderStateMix
             return tableRowHighScore(highScore);
           }).toList();
           highScoresStringList = highScoresValues.map((e) {
-            return '$e[0],$e[1]';
+            return '${e[0]},${e[1]}';
           }).toList();
           saveList('highScoresStringList', highScoresStringList);
         });
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context) => ScoreScreen()));
+        StreamLogic.visibilityToggle();
       }
     }
   }

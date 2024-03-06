@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'variables.dart';
+import '../variables.dart';
 import 'dart:math';
-import 'row_of_feedback.dart';
+import '../widgets/row_of_feedback.dart';
 
 
 

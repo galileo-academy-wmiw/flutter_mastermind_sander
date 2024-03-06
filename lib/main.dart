@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/settings_screen.dart';
-import 'start_screen.dart';
-import 'info_screen.dart';
-import "game_screen.dart";
+import 'package:flutter_mastermind_sander/screens/score_screen.dart';
+import 'package:flutter_mastermind_sander/screens/settings_screen.dart';
+import 'package:flutter_mastermind_sander/streams/stream_logic.dart';
+import 'screens/start_screen.dart';
+import 'screens/info_screen.dart';
+import 'screens/game_screen.dart';
 import 'variables.dart';
 
 
@@ -15,10 +17,10 @@ class MastermindApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    readDouble('numOfTries').then((value) => numOfTries = value!);
-    readBool('isSoundOn').then((value) => isSoundOn = value!);
-    readBool('isColorBlindModeOn').then((value) => isColorBlindModeOn = value!);
-    readBool('isDevModeOn').then((value) => isDevModeOn = value!);
+    readDouble('numOfTries', numOfTries).then((value) => numOfTries = value);
+    readBool('isSoundOn', isSoundOn).then((value) => isSoundOn = value);
+    readBool('isColorBlindModeOn', isColorBlindModeOn).then((value) => isColorBlindModeOn = value);
+    readBool('isDevModeOn', isDevModeOn).then((value) => isDevModeOn = value);
 
     readList('highScoresStringList').then((value) => highScoresStringList = value ?? []);
     highScoresValues = highScoresStringList.map((e) {
@@ -66,7 +68,39 @@ class GameScreenRoute extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            GameScreen(),
+            Stack(
+                children: [
+                  GameScreen(),
+                  StreamBuilder<bool>(
+                    initialData: false,
+                    stream: StreamLogic.getStreamVisibility(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData || snapshot.data == null) {
+                        return AlertDialog(
+                          title: Text('Error'),
+                        );
+                      }
+
+                      bool visValue = snapshot.data!;
+                      if (!visValue) return Container();
+                      return Padding(
+                        padding: const EdgeInsets.all(35.0),
+                        child: Center(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(75),
+                              side: BorderSide(
+                                color: textColor,
+                                width: 2.5
+                              )
+                            ),
+                              child: ScoreScreen()
+                          ),
+                        ),
+                      );
+                    }
+                  )
+                ]),
             InfoScreen(),
           ],
         ),

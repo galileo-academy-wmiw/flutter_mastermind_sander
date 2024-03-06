@@ -1,8 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mastermind_sander/game_screen.dart';
-import 'score_screen.dart';
-import 'variables.dart';
+import 'package:flutter_mastermind_sander/screens/game_screen.dart';
+import '../screens/score_screen.dart';
+import '../streams/stream_logic.dart';
+import '../variables.dart';
 
 // Widget for the Feedback row
 class FeedbackRow extends StatefulWidget {
@@ -56,9 +57,21 @@ class _FeedbackRowState extends State<FeedbackRow> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                            child: Text(feedbackList[i],
-                              style: appBarTextStyle,
-                              textAlign: TextAlign.center,
+                            child: StreamBuilder(
+                              initialData: 'Welcome to Mastermind! In this game you will have to guess my secret code of four colors! Change the color of the circles by clicking on them!',
+                              stream:StreamLogic.getStreamFBMessage(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) return Text(
+                                  'ERROR: Something has gone horribly wrong....',
+                                  style: appBarTextStyle,
+                                  textAlign: TextAlign.center,
+                                );
+                                String output = snapshot.data!;
+                                return Text(output,
+                                  style: appBarTextStyle,
+                                  textAlign: TextAlign.center,
+                                );
+                              },
                             )
                         ),
                       ],
@@ -83,10 +96,7 @@ class ScoreScreenButton extends StatelessWidget {
     return ElevatedButton(
       child: Text("Give up", style: buttonTextStyle),
       onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ScoreScreen())
-        );
+        StreamLogic.visibilityToggle();
         if (isSoundOn) {
           audioPlayer.play(AssetSource('audio/90s-game-ui-6-185099.mp3'));
         }
@@ -95,6 +105,3 @@ class ScoreScreenButton extends StatelessWidget {
   }
 }
 
-List<String> feedbackList = [
-  'Welcome to Mastermind! In this game you will have to guess my secret code of four colors! Change the color of the circles by clicking on them!'
-];
